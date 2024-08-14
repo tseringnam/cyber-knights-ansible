@@ -1,0 +1,7 @@
+---
+# Handler for webserver: hander are called by other plays 
+# restart the httpd service service only if index.html file is modified .
+- name: Restart Httpd
+  service:
+    name: httpd
+    state: restarted

@@ -1,0 +1,11 @@
+---
+# this playbook deploye the whole application stack in this site
+
+- name: configure and deploy the webservers and application code
+  hosts: webservers
+  remote_user: ansible
+  become: yes
+
+
+  roles:
+    - web

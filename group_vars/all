@@ -1,0 +1,9 @@
+---
+
+# webserver variable 
+
+document_root: "/var/www/html"
+web_user: "apache"
+web_group: "apache"
+package_list:
+- "httpd"

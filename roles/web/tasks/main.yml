@@ -1,0 +1,29 @@
+---
+
+- name: Install httpd packages
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:  "{{ package_list }}"
+
+- name: Ensure the web server is running
+  service:
+    name: httpd
+    state: started
+    enabled: yes
+
+- name: Create document root directory
+  file:
+    path: "{{ document_root }}"
+    owner: "{{ web_user }}"
+    group: "{{ web_group }}"
+    state: directory
+    mode: '0755'
+
+- name: Deploy a simple index.html
+  copy:
+    content: "<html><h1>Hello from {{ inventory_hostname }}</h1></html>"
+    dest: "{{ document_root }}/index.html"
+    mode: '0644'
+  notify: Restart Httpd
+
