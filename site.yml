@@ -6,6 +6,15 @@
   remote_user: ansible
   become: yes
 
-
   roles:
     - web
+
+    # this playboook will configure the hpa proxy
+
+- name: configure and deploy the webservers and application code
+  hosts: haproxy
+  remote_user: ansible
+  become: yes
+
+  roles:
+    - hpa
