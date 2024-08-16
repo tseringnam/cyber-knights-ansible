@@ -1,6 +1,17 @@
 ---
 # this playbook deploye the whole application stack in this site
 
+# configure the common security 
+- name: Install  the common security 
+  hosts: all
+  remote_user: ansible
+  become: yes
+
+  roles:
+    - common
+
+
+#configure web proxy 
 - name: configure and deploy the webservers and application code
   hosts: webservers
   remote_user: ansible
@@ -11,10 +22,11 @@
 
     # this playboook will configure the hpa proxy
 
-- name: configure and deploy the webservers and application code
+- name: configure and deploy the Haproxy
   hosts: haproxy
   remote_user: ansible
   become: yes
 
   roles:
     - hpa
+

@@ -1,0 +1,14 @@
+---
+- name: Install common packages on all VMs
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install common packages
+      yum:
+        name:
+          - bind-utils
+          - man
+          - man-pages
+          - mlocate
+          - sysstat
+        state: present
