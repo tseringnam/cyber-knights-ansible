@@ -1,4 +1,5 @@
 ---
+#handler to restart ssh and reboot the system 
 - name: Restart SSH
   service:
     name: sshd
@@ -7,3 +8,4 @@
 - name: Reboot the system
   reboot:
     reboot_timeout: 600
+  when: ansible_facts.selinux.status == "enabled"
