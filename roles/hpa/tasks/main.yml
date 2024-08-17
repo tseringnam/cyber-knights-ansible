@@ -1,12 +1,13 @@
 ---
 - name: Install HAProxy
-  package:
-    name: haproxy
+  yum:
+    name: "{{ haproxy_package }}"
     state: present
+  notify: Restart HAProxy
 
 - name: Ensure HAProxy configuration directory exists
   file:
-    path: /etc/haproxy
+    path: "{{ haproxy_cfg_dir }}"
     state: directory
     owner: root
     group: root
@@ -14,15 +15,14 @@
 - name: Deploy HAProxy configuration
   template:
     src: haproxy.cfg.j2
-    dest: /etc/haproxy/haproxy.cfg
+    dest: "{{ haproxy_cfg }}"
     owner: root
     group: root
     mode: '0644'
-  notify:
-    - Restart HAProxy
+  notify: Restart HAProxy
 
-- name: Ensure HAProxy is started and enabled
-  service:
-    name: haproxy
-    state: started
-    enabled: yes
+# - name: Ensure HAProxy is started and enabled
+#   service:
+#     name: "{{ haproxy_service }}"
+#     state: started
+#     enabled: yes

@@ -1,0 +1,37 @@
+---
+
+# Ansible playbook disables the root login, enables firewall , disable selinux and set password as " password " on alll servers
+- name: Disable root login via SSH
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^PermitRootLogin'
+    line: 'PermitRootLogin no'
+  notify:
+    - Restart SSH
+
+- name: Ensure firewall is enabled and running
+  service:
+    name: firewalld
+    state: started
+    enabled: yes
+
+- name: Disable SELinux in configuration file
+  lineinfile:
+    path: /etc/selinux/config
+    regexp: '^SELINUX='
+    line: 'SELINUX=disabled'
+    state: present
+
+- name: Ensure SELinux is disabled immediately
+  selinux:
+    state: disabled
+
+- name: Set password for all users
+  user:
+    name: "{{ item }}"
+    password: "{{ 'password' | password_hash('sha512') }}"
+    update_password: always
+  loop: "{{ ansible_users }}"
+  when: ansible_users is defined
+
+

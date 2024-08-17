@@ -7,3 +7,8 @@ web_user: "apache"
 web_group: "apache"
 package_list:
 - "httpd"
+# haproxy variable
+haproxy_package: haproxy
+haproxy_service: haproxy
+haproxy_cfg: /etc/haproxy/haproxy.cfg
+haproxy_cfg_dir: /etc/haproxy
