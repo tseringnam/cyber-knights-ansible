@@ -25,6 +25,7 @@
 - name: Ensure SELinux is disabled immediately
   selinux:
     state: disabled
+  notify: Reboot the system
 
 - name: Set password for all users
   user:
