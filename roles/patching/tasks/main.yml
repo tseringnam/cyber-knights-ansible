@@ -1,0 +1,14 @@
+---
+- name: Install the latest kernel
+  yum:
+    name: kernel
+    state: latest
+
+- name: Install the latest packages and apply security updates
+  yum:
+    name: '*'
+    state: latest
+    update_cache: yes
+      
+   
+    
