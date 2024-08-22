@@ -13,16 +13,27 @@ Gateway: 192.168.152.1
 Domain: ziyotek2.local
 
 Servers:        Servername                  Ip Address
+
 Database  -     prdx-db201                  192.168.152.20  
+
 Webserver1      prdx-webserver201           192.168.152.30 
+
 Webserver2      prdx-webserver202           192.168.152.32 
+
 Webserver3      prdx-webserver203           192.168.152.34
+
 Load Balancer   prdx-haproxy201             192.168.152.40
+
 Nagios          prdx-nagios201              192.168.152.52
+
 Ansible         prdx-ansible201             192.168.152.70
+
 Docker primary  prdx-dprimary201            192.168.152.60
+
 Docker Worker1 prdx-dworker201              192.168.152.62
+
 Docker Worker2 prdx-dworker202              192.168.152.64
+
 Kubernetes      prdx-kube201                192.168.152.90
 
 
