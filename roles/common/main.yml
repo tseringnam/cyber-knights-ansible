@@ -1,4 +1,6 @@
 ---
+ # packages to be installed on all the servers
+ 
 - name: Install common packages on all VMs
   hosts: all
   become: yes
@@ -7,8 +9,9 @@
       yum:
         name:
           - bind-utils
-          - man-db
+          - man-db # man-db is the package for man
           - man-pages
           - mlocate
           - sysstat
+          - git
         state: present

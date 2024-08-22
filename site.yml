@@ -1,14 +1,36 @@
 ---
 # this playbook deploye the whole application stack in this site
 
-# configure the common security 
-- name: Install  the common security 
+
+#update kernel and OS on Centos 9
+- name: Update Kernel And OS
+  hosts: all
+  remote_user: ansible
+  become: yes
+
+  roles:
+    - patching
+
+
+# Install the common packages on all servers
+- name: Install  the common packages
   hosts: all
   remote_user: ansible
   become: yes
 
   roles:
     - common
+
+#configure the common security on all the servers
+- name: Install  the common packages
+  hosts: all
+  remote_user: ansible
+  become: yes
+
+  roles:
+    - security
+
+
 
 
 #configure web proxy 

@@ -1,0 +1,85 @@
+
+---
+- name: Configure Docker Swarm Primary Master 
+  hosts: manager_node
+  become: yes
+  tasks:
+    - name: Install required packages
+      yum:
+        name:
+          - yum-utils
+          - device-mapper-persistent-data
+        state: present
+
+    - name: Add Docker repository
+      command: >
+        yum-config-manager
+        --add-repo
+        https://download.docker.com/linux/centos/docker-ce.repo
+
+    - name: Install Docker
+      yum:
+        name: docker-ce
+        state: latest
+
+    - name: Ensure Docker is running
+      service:
+        name: docker
+        state: started
+        enabled: yes
+  
+     
+    - name: Check if Docker Swarm is already initialized
+      command: docker info --format '{% raw %}{{ .Swarm.LocalNodeState }}{% endraw %}'
+      register: swarm_status
+      changed_when: false
+
+    - name: Initialize Docker Swarm
+      command: docker swarm init
+      when: swarm_status.stdout != 'active'
+      register: swarm_init
+      changed_when: "'This node is already part of a swarm' not in swarm_init.stderr"
+
+    - name: Get Docker Swarm worker join token
+      command: docker swarm join-token -q worker
+      when: swarm_status.stdout == 'active' or swarm_init is changed
+      register: worker_token
+
+    - name: Display the worker join token
+      debug:
+        msg: "Docker Swarm worker join token: {{ worker_token.stdout }}"
+      when: swarm_status.stdout == 'active' or swarm_init is changed
+
+
+
+#install docker on worker nodes
+
+- name: Install Docker on Worker Nodes
+  hosts: worker_node
+  become: yes
+
+  tasks:
+    - name: Install required packages
+      yum:
+        name: 
+          - yum-utils
+          - device-mapper-persistent-data
+          - lvm2
+        state: present
+
+    - name: Add Docker repository
+      shell: |
+        yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+      args:
+        creates: /etc/yum.repos.d/docker-ce.repo
+
+    - name: Install Docker
+      yum:
+        name: docker-ce
+        state: latest
+
+    - name: Ensure Docker service is running
+      service:
+        name: docker
+        state: started
+        enabled: yes
