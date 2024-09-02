@@ -21,8 +21,8 @@ defaults
     timeout server 1m
     timeout check 10s
 
-frontend http_front_web
-    bind *:8082
+frontend http_front_webh    
+    bind *:80
     default_backend servers_web
 
 backend servers_web
