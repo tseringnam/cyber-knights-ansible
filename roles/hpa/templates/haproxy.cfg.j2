@@ -2,7 +2,7 @@ global
     log /dev/log local0
     log /dev/log local1 notice
     chroot /var/lib/haproxy
-    stats socket /run/haproxy/admin.sock mode 660 level admin expose-fd listeners
+    stats socket /run/haproxy/admin.sock mode 755 level admin expose-fd listeners
     stats timeout 30s
     user haproxy
     group haproxy
@@ -22,7 +22,7 @@ defaults
     timeout check 10s
 
 frontend http_front_web
-    bind *:80
+    bind *:8082
     default_backend servers_web
 
 backend servers_web

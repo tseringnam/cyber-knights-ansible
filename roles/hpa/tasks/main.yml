@@ -21,8 +21,8 @@
     mode: '0644'
   notify: Restart HAProxy
 
-# - name: Ensure HAProxy is started and enabled
-#   service:
-#     name: "{{ haproxy_service }}"
-#     state: started
-#     enabled: yes
+- name: Ensure HAProxy is started and enabled
+  service:
+    name: "{{ haproxy_service }}"
+    state: started
+    enabled: yes
