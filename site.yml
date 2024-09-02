@@ -2,14 +2,14 @@
 # this playbook deploye the whole application stack in this site
 
 
-#update kernel and OS on Centos 9
-- name: Update Kernel And OS
-  hosts: all
-  remote_user: ansible
-  become: yes
+# #update kernel and OS on Centos 9
+# - name: Update Kernel And OS
+#   hosts: all
+#   remote_user: ansible
+#   become: yes
 
-  roles:
-    - patching
+#   roles:
+#     - patching
 
 
 # Install the common packages on all servers
@@ -29,6 +29,7 @@
 
   roles:
     - security
+
 
 
 

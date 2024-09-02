@@ -12,3 +12,13 @@ haproxy_package: haproxy
 haproxy_service: haproxy
 haproxy_cfg: /etc/haproxy/haproxy.cfg
 haproxy_cfg_dir: /etc/haproxy
+
+
+#db variable
+
+mariadb_root_password: "password"
+bind_address: "0.0.0.0"
+ansible_python_interpreter: /usr/bin/python3
+phpmyadmin_url: "https://www.phpmyadmin.net/downloads/phpMyAdmin-latest-all-languages.tar.gz"
+phpmyadmin_download_dir: "/tmp/phpmyadmin"
+phpmyadmin_install_dir: "/usr/share/phpmyadmin"
