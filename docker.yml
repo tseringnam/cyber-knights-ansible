@@ -83,3 +83,7 @@
         name: docker
         state: started
         enabled: yes
+
+        #to join the workder node 
+        #sudo docker join --token token_genereated 192.168.152.168.60:2377
+        
