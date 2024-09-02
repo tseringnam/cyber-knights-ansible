@@ -13,22 +13,22 @@
 
 
 # Install the common packages on all servers
-- name: Install  the common packages
-  hosts: all
-  remote_user: ansible
-  become: yes
+# - name: Install  the common packages
+#   hosts: all
+#   remote_user: ansible
+#   become: yes
 
-  roles:
-    - common
+#   roles:
+#     - common
 
-#configure the common security on all the servers
-- name: Install  the common packages
-  hosts: all
-  remote_user: ansible
-  become: yes
+# #configure the common security on all the servers
+# - name: Install  the common packages
+#   hosts: all
+#   remote_user: ansible
+#   become: yes
 
-  roles:
-    - security
+#   roles:
+#     - security
 
 
 
@@ -44,11 +44,11 @@
 
     # this playboook will configure the hpa proxy
 
-- name: configure and deploy the Haproxy
-  hosts: haproxy
-  remote_user: ansible
-  become: yes
+# - name: configure and deploy the Haproxy
+#   hosts: haproxy
+#   remote_user: ansible
+#   become: yes
 
-  roles:
-    - hpa
+#   roles:
+#     - hpa
 

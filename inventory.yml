@@ -3,9 +3,10 @@
 192.168.152.40
 
 [webservers]
-192.168.152.30
-192.168.152.32
-192.168.152.34
+192.168.152.30  webserver_name="web server 1"
+192.168.152.32  webserver_name="web server 2"
+192.168.152.34  webserver_name="web server 3"
+
 
 [worker_node]
 192.168.152.62
