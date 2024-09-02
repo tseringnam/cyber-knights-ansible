@@ -33,6 +33,7 @@
 
 
 
+
 #configure web proxy 
 - name: configure and deploy the webservers and application code
   hosts: webservers

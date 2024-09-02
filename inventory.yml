@@ -1,11 +1,10 @@
 [haproxy]
-#192.168.152.27
 192.168.152.40
 
 [webservers]
-192.168.152.30
-192.168.152.32
-192.168.152.34
+192.168.152.30  webserver_name="web server 1"
+192.168.152.32  webserver_name="web server 2"
+192.168.152.34  webserver_name="web server 3"
 
 [worker_node]
 192.168.152.62
@@ -31,4 +30,4 @@
 ansible_user=ansible
 ansible_ssh_private_key_file=~/.ssh/id_rsa
 prdx-haproxy201 =192.168.152.40
-#test-server =192.168.152.27
+

@@ -22,7 +22,7 @@
 
 - name: Deploy a simple index.html
   copy:
-    content: "<html><h1>Hello from {{ inventory_hostname }}</h1></html>"
+    content: "<html><h1>Hello from {{ webserver_name }}</h1></html>"
     dest: "{{ document_root }}/index.html"
     mode: '0644'
   notify: Restart Httpd
