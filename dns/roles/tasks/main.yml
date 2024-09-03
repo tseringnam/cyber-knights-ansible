@@ -1,0 +1,34 @@
+---
+- name: Ensure 'dns=none' is set in /etc/NetworkManager/NetworkManager.conf
+  ini_file:
+    path: /etc/NetworkManager/NetworkManager.conf
+    state: present
+    no_extra_spaces: yes
+    section: main
+    option: dns
+    value: none
+    owner: root
+    group: root
+    mode: 0644
+    backup: yes
+  notify:
+    - reload NetworkManager
+
+- name: Ensure resolv.conf uses the specified DNS server
+  lineinfile:
+    path: /etc/resolv.conf
+    state: present
+    line: "nameserver {{ dns_server }}"
+    create: yes
+    backup: yes
+  notify:
+    - restart NetworkManager
+
+- name: Ensure resolv.conf contains only the specified DNS server
+  lineinfile:
+    path: /etc/resolv.conf
+    state: absent
+    regexp: "^nameserver (?!{{ dns_server | regex_escape }})"
+    backup: yes
+  notify:
+    - restart NetworkManager
